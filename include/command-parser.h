@@ -1,3 +1,6 @@
+#ifndef COMMAND_PARSER_H
+#define COMMAND_PARSER_H
+
 #include <boost/program_options.hpp>
 
 class CommandParser
@@ -9,3 +12,5 @@ private:
 
     static CommandParser* instance;
 };
+
+#endif

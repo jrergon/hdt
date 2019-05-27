@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Init::Init(char* host, char* username, char* password, char* dbType)
+Init::Init(char* host, char* username, char* password, char* dbType, char* dbName)
 {
-    Config* config = new Config(host, username, password, dbType);
+    Config* config = new Config(host, username, password, dbType, dbName);
     FileSystem fileSystem;
 
     bool status = fileSystem.createXmlFile(config->toFileContent(), "config.xml");

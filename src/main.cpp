@@ -16,12 +16,13 @@ int main(int argc, char* argv[])
     namespace po = boost::program_options;
     po::options_description desc("Options");
     desc.add_options()
-      ("help,h", "list available subcommands")
-      ("init,i", "initialize new hdt project")
-      ("host,h", po::value<string>(), "host address of rdbms")
-      ("username,u", po::value<string>(), "username to authenticate")
-      ("password,p", po::value<string>(), "password of authenticated user")
-      ("type,t", po::value<string>(), "type of rdbms");
+        ("help,h", "list available subcommands")
+        ("init,i", "initialize new hdt project")
+        ("host,h", po::value<string>(), "host address of rdbms")
+        ("username,u", po::value<string>(), "username to authenticate")
+        ("password,p", po::value<string>(), "password of authenticated user")
+        ("type,t", po::value<string>(), "type of rdbms")
+        ("name", po::value<string>(), "name of database");
 
     po::variables_map varMap;
 

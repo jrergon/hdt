@@ -1,11 +1,22 @@
 #include "config.h"
 
-Config::Config(char* host, char* username, char* password, char* type)
+Config::Config(char* host, char* username, char* password, char* type, char* dbName)
 {
     this->host = host;
     this->username = username;
     this->password = password;
     this->type = type;
+    this->dbName = dbName;
+}
+
+Config::Config(XMLDocument* xmlDoc)
+{
+    XMLNode* configNode = xmlDoc->FirstChild();
+    this->host = (char*)configNode->FirstChildElement("Host")->GetText();
+    this->username = (char*)configNode->FirstChildElement("Username")->GetText();
+    this->password = (char*)configNode->FirstChildElement("Password")->GetText();
+    this->type = (char*)configNode->FirstChildElement("Type")->GetText();
+    this->dbName = (char*)configNode->FirstChildElement("Name")->GetText();
 }
 
 char* Config::getHost() const
@@ -48,6 +59,16 @@ void Config::setType(char* value)
     type = value;
 }
 
+char* Config::getDbName() const
+{
+    return dbName;
+}
+
+void Config::setDbName(char* value)
+{
+    dbName = value;
+}
+
 XMLDocument* Config::toFileContent() {
     XMLDocument* xmlDoc = new XMLDocument();
 
@@ -69,6 +90,10 @@ XMLDocument* Config::toFileContent() {
     XMLElement* typeElement = xmlDoc->NewElement("Type");
     typeElement->SetText(this->type);
     rootNode->InsertEndChild(typeElement);
+
+    XMLElement* nameElement = xmlDoc->NewElement("Name");
+    nameElement->SetText(this->dbName);
+    rootNode->InsertEndChild(nameElement);
 
     return xmlDoc;
 }
